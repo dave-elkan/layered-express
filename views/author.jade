@@ -1,0 +1,7 @@
+h2= result.name
+h3= "Books by " + result.name
+ul
+  - result.bookList.forEach(function(book) {
+    li
+      a(href='/book/' + book.key)=book.name
+  - })

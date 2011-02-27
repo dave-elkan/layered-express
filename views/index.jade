@@ -1,0 +1,6 @@
+h2= name
+ul
+  - result.forEach(function(item) {
+    li
+      a(href='/' + type + '/' + item.key)=item.name
+  - })

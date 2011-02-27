@@ -1,0 +1,17 @@
+h2 Home
+h3 
+  a(href='/authors') Authors
+ul
+  - result.authors.forEach(function(author) {
+    li
+      a(href='/author/' + author.key)=author.name
+  - })
+
+h3 
+  a(href="/books") Books
+ul
+  - result.books.forEach(function(book) {
+    li
+      a(href='/book/' + book.key)=book.name
+  - })
+
