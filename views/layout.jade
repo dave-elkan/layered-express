@@ -1,15 +1,15 @@
 !!!
 html
   head
-    title= title.readable
+    title= "eDave's Library - " + title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    h1 The Library
+    h1 eDave's Library
     ul
       li
-        a(href='/') Home
+        a(href='/', class=(type == "home" ? "selected" : "")) Home
       li
-        a(href='/authors') List of authors
+        a(href='/authors', class=(type == "author" ? "selected" : "")) Authors
       li
-        a(href='/books') List of books
+        a(href='/books', class=(type == "book" ? "selected" : "")) Books
     != body

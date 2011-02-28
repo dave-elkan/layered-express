@@ -38,7 +38,7 @@ app.configure('production', function(){
  * 
  * These services are instantiated here as singletons and attached to the app object.
  * This prevents the need for services to instantiate new instances of other services 
- * (as they are inter-dependent).
+ * (as they can inter-dependent) which would potentially cause circular issues.
  */
 app.bookService = new BookService(app);
 app.authorService = new AuthorService(app);

@@ -2,3 +2,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+a.selected {
+    font-weight:bold;
+}
