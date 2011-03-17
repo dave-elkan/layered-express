@@ -1,0 +1,41 @@
+Using <a href="http://en.wikipedia.org/wiki/Abstraction_layer">layers</a> in your app is a good way to ensure <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a>. This post is not an in-depth description to this architecture pattern but more a quick description of each layer's purpose and how I've implemented them in node using express. For the impatient, you can <a href="https://github.com/daveelkan/layered-express">peruse the code of the working example here</a>.
+<h2>View Layer</h2>
+<ol>
+	<li>Accept some data</li>
+	<li>Apply any required formatting</li>
+	<li>Render</li>
+</ol>
+A view wraps a template and supplies additional functions to help take the burdon off the templating system, whichever one you use. For example, text transformations, regular expressions, etc are best done outside of the template in a simple testable function.  In the following AuthorView example, whilst being contrived, the format function sets the Authors name to upper case.
+
+<script src="https://gist.github.com/851632.js?file=AuthorView.js"></script>
+<h2>Controllers</h2>
+<ol>
+	<li>Map a URI</li>
+	<li>Extract path, request, session or cookie variables</li>
+	<li>Kick off some work (it's not concerned what nor how it gets done)</li>
+	<li>Send the result to a View for rendering</li>
+</ol>
+
+This example illustrates the use of Controller.setupGetRoute, a convenience function which takes a route, an action and a hash of views mapped to the Accept header they respond to. The action property has to be a function in the current Controller instance which extracts the required parameters from the request and forwards them onto the Service Layer. Using the AuthorController as an example, routes are added like this:
+<script src="https://gist.github.com/851632.js?file=AuthorController.js"></script>Note the lack of error handling in AuthorController. All errors resulting from the Service layer are handled in Controller.setupGetRoute preventing clutter in AuthorController.  For each request, the the Accept header is used to map to a View (if any). If a View is matched, its render function is called with the request and response objects along with the result of the call to the action.  Express middleware can be used instead of this call to the Service layer, however if you do you have to attach the result of the action to the request object. That feels a bit muddled to me. Happy to be proven wrong, though!
+
+<script src="https://gist.github.com/851632.js?file=Controller.js"></script>
+<h2>Service Layer</h2>
+<ol>
+	<li>Do something for the Controller</li>
+	<li>Return the result to the Controller</li>
+</ol>
+
+Try to think of the Service layer as the "do anything the Controller wants" layer. It consists of specific use-case functions, as in the following AuthorService gist. This function pulls the author requested and then their books and returns the result (or an error).  The most important thing about the Service layer is that it separates the Controllers from the database or other sources of complexity. This ensures that writing (and testing) Controllers remains a simple task.  Services are inter-dependent singletons and are attached to the app. i.e. In the example below, the AuthorService uses the BookService to get the Author's Books.
+<script src="https://gist.github.com/862947.js?file=AuthorService.js"></script>
+<h2>Data Access Layer</h2>
+<ol>
+	<li>Put, Get, Update and Delete datastore entries.</li>
+</ol>
+The Data Access Layer is our last layer. It is hard-tied to the datastore of your choice and manages every interaction with it. Once again, encapsulation is the key. Having all of your database code decoupled from your Controllers and Services makes them easier to test. It also makes moving from one datastore to another a much less painful process.
+
+In the example code, each dao is tied to its own collection. In so, calling getList from AuthorDao will return a list of authors, from BookDao, books and so on. For now the example only handles Put and Get operations to keep the example from growing too large. Feel free to send a pull request!
+<h2>Working Example</h2>
+Clone a copy of the working example here: <a href="https://github.com/daveelkan/layered-express">https://github.com/daveelkan/layered-express</a>
+<h2>Notes on Models</h2>
+<a href="http://mongoosejs.com/">Mongoose</a> is making great strides to becoming <em>the</em> ORM for node. It does a wonderful job of taking care of the heavy lifting of MongoDB abstraction, validation, defaults, etc. However I won't be using it in this example as one of my main goals with using a layering technique is that sources of Error are centralised and handled in as few places as possible. Mongoose uses an "enriched model" pattern (where every model object has a save, update and delete function). Whilst this is very convenient, I wanted to enforce my database transactions to take place from one central point.
