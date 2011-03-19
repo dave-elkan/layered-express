@@ -6,11 +6,11 @@ var express = require('express'),
 function configureServer(server) {
 	server.configure(function(){
 	  server.set('views', __dirname + '/../views');
-	  server.use(express.bodyDecoder());
+	  server.use(express.bodyParser());
 	  server.use(express.methodOverride());
 	  server.use(express.compiler({ src: __dirname + '/../public', enable: ['less'] }));
 	  server.use(server.router);
-	  server.use(express.staticProvider(__dirname + '/../public'));
+	  server.use(express.static(__dirname + '/../public'));
 	});
 
 	return server;
@@ -84,7 +84,7 @@ exports["testAuthorsRouteIsSetupAndRespondsAsExpectedInHTML"] = function() {
 		{
 			status: 200,
 			headers: {
-				'Content-Type': "text/html; charset=utf-8"
+				'Content-Type': "text/html; charset=utf8"
 			}
 		}
 	);
