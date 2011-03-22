@@ -21,7 +21,7 @@ var express = require('express'),
 app.pool = GenericPool.Pool({
     max: 10,
     create: function(callback) {
-        var db = new Db('layerednode', new Server("127.0.0.1", 27017, {}));
+        var db = new Db('layeredexpress', new Server("127.0.0.1", 27017, {}));
         db.open(function(err, p_client) {
             callback(db);                
         });
