@@ -1,7 +1,6 @@
+# A Layered Node Example
 
-# Layered Node Example
-
-    For more information see the blog post on [edave.net](http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express)
+  For more information see the blog post on [edave.net](http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express)
 
 ## License 
 
