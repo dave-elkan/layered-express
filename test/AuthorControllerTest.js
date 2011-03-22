@@ -84,7 +84,7 @@ exports["testAuthorsRouteIsSetupAndRespondsAsExpectedInHTML"] = function() {
 		{
 			status: 200,
 			headers: {
-				'Content-Type': "text/html; charset=utf8"
+				'Content-Type': "text/html; charset=utf-8"
 			}
 		}
 	);

@@ -76,7 +76,7 @@ exports["testRouteIsSetupAndRespondsAsExpectedInHTML"] = function() {
 		{
 			status: 200,
 			headers: {
-				'Content-Type': "text/html; charset=utf8"
+				'Content-Type': "text/html; charset=utf-8"
 			}
 		}
 	);
@@ -121,7 +121,7 @@ exports["testRouteIsSetupAndMiddlewareIsCalled"] = function(beforeExit) {
 		{
 			status: 200,
 			headers: {
-				'Content-Type': "text/html; charset=utf8"
+				'Content-Type': "text/html; charset=utf-8"
 			}
 		}
 	);
