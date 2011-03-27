@@ -1,4 +1,4 @@
-var Dao = require("../lib/dao/Dao").Dao,
+var Dao = require("../lib/dao/Dao"),
     assert = require('assert');
 
 function setMockCollection(dao, results) {

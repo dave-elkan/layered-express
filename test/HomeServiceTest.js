@@ -1,4 +1,4 @@
-var HomeService = require("../lib/service/HomeService").HomeService,
+var HomeService = require("../lib/service/HomeService"),
     assert = require('assert');
 
 exports["TestHomeServiceAttemptsToGetAListOfAuthorsAndBooks"] = function() {

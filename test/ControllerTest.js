@@ -1,9 +1,9 @@
 var express = require('express'),
 	connect = require('connect'),
     assert = require('assert'),
-    JsonView = require('../lib/view/JsonView').JsonView,
-    TestView = require('./lib/view/TestView').TestView,
-    Controller = require('../lib/controller/Controller').Controller;
+    JsonView = require('../lib/view/JsonView'),
+    TestView = require('./lib/view/TestView'),
+    Controller = require('../lib/controller/Controller');
 	
 function configureServer(server) {
     server.configure(function(){

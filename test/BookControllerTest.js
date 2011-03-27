@@ -1,7 +1,7 @@
 var express = require('express'),
 	connect = require('connect'),
     assert = require('assert'),
-    AuthorController = require('../lib/controller/AuthorController').AuthorController;
+    AuthorController = require('../lib/controller/AuthorController');
 	
 function configureServer(server) {
 	server.configure(function(){

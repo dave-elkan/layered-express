@@ -11,12 +11,12 @@ var express = require('express'),
     GenericPool = require('generic-pool'),
     
     notFoundHandler = require("./lib/middleware/NotFoundHandler"),
-    BookService = require("./lib/service/BookService").BookService,
-    BookController = require('./lib/controller/BookController').BookController,
-    AuthorService = require("./lib/service/AuthorService").AuthorService,
-    AuthorController = require('./lib/controller/AuthorController').AuthorController,
-    HomeService = require("./lib/service/HomeService").HomeService,
-    HomeController = require('./lib/controller/HomeController').HomeController;
+    BookService = require("./lib/service/BookService"),
+    BookController = require('./lib/controller/BookController'),
+    AuthorService = require("./lib/service/AuthorService"),
+    AuthorController = require('./lib/controller/AuthorController'),
+    HomeService = require("./lib/service/HomeService"),
+    HomeController = require('./lib/controller/HomeController');
     
 app.pool = GenericPool.Pool({
     max: 10,
@@ -65,7 +65,7 @@ app.authorService = new AuthorService(app);
 app.homeService = new HomeService(app);
 
 // Bootstrap Content
-require("./lib/bootstrap").bootstrap(app);
+require("./lib/bootstrap")(app);
 
 // Routes
 new BookController(app);

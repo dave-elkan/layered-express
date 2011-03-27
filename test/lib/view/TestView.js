@@ -1,4 +1,4 @@
-var View = require('../../../lib/view/View').View;
+var View = require('../../../lib/view/View');
 
 TestView = function() {};
 
@@ -16,4 +16,4 @@ TestView.prototype.getTitle = function() {
     return "Test";
 };
 
-exports.TestView = TestView;
+module.exports = TestView;
