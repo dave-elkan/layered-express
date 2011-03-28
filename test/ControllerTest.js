@@ -3,7 +3,7 @@ var express = require('express'),
     assert = require('assert'),
     JsonView = require('../lib/view/JsonView'),
     TestView = require('./lib/view/TestView'),
-    Controller = require('../lib/controller/Controller');
+    Controller = require('../lib/controllers/AbstractController');
 	
 function configureServer(server) {
     server.configure(function(){

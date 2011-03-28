@@ -9,14 +9,8 @@ var express = require('express'),
     ObjectId = require('mongodb').ObjectId,
     Server = require('mongodb').Server,
     GenericPool = require('generic-pool'),
-    
     notFoundHandler = require("./lib/middleware/NotFoundHandler"),
-    BookService = require("./lib/service/BookService"),
-    BookController = require('./lib/controller/BookController'),
-    AuthorService = require("./lib/service/AuthorService"),
-    AuthorController = require('./lib/controller/AuthorController'),
-    HomeService = require("./lib/service/HomeService"),
-    HomeController = require('./lib/controller/HomeController');
+    loader = require("./lib/loader");
     
 app.pool = GenericPool.Pool({
     max: 10,
@@ -54,27 +48,19 @@ app.configure('production', function(){
 });
 
 /**
- * Services.
+ * Services and Controllers.
  * 
  * These services are instantiated here as singletons and attached to the app object.
  * This prevents the need for services to instantiate new instances of other services 
  * (as they can inter-dependent) which would potentially cause circular issues.
  */
-app.bookService = new BookService(app);
-app.authorService = new AuthorService(app);
-app.homeService = new HomeService(app);
+loader(app, "services");
+loader(app, "controllers");
 
 // Bootstrap Content
 require("./lib/bootstrap")(app);
 
-// Routes
-new BookController(app);
-new AuthorController(app);
-new HomeController(app);
-
-
 // Only listen on $ node app.js
-
 if (!module.parent) {
   app.listen(3000);
   console.log("Express server listening on port %d", app.address().port)
