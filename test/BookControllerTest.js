@@ -5,7 +5,7 @@ var express = require('express'),
 	
 function configureServer(server) {
 	server.configure(function(){
-	  server.set('views', __dirname + '/../views');
+	  server.set('views', __dirname + '/../viewss');
 	  server.use(express.bodyParser());
 	  server.use(express.methodOverride());
 	  server.use(express.compiler({ src: __dirname + '/../public', enable: ['less'] }));

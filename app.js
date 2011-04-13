@@ -59,6 +59,7 @@ function getInstanceName(className) {
  */
 loader(app, "services");
 loader(app, "controllers");
+loader(app, "views");
 
 var controllers = {},
     routes = require('./lib/routes/routes')(app),
@@ -66,8 +67,10 @@ var controllers = {},
         method: "get",
         headers: {
             "accept": "text/html"
-        }
+        },
+        view: app.views.blankView
     };
+
 for (var path in routes) {
     var fielders = routes[path];
     fielders.forEach(setupRoute);
@@ -76,16 +79,16 @@ for (var path in routes) {
 function setupRoute(fielder) {
     fielder = merge(baseFielder, fielder);
     app[fielder.method].call(app, path, [], function(req, res, next) {
-        if (req.accepts(fielder.headers.accept)) {
-            var args = Array().slice.apply(arguments);
-            args.push({
-                fielder: fielder,
-                path: path
-            });
-            fielder.action.apply(app, args);
-            return;
-        } else {
-            next();
+        for (var view in fielder.views) {
+            if (req.accepts(view)) {
+                fielder.action.call(app, req, res, function(error, result) {
+                    if (error) {
+                        throw error;
+                    }
+                    fielder.views[view].render(req, res, result);
+                });
+                return;
+            }
         }
     });
 }
@@ -100,6 +103,14 @@ function merge(base, inst) {
     }
     
     return merged;
+}
+
+function doMerge(target, source) {
+    for (var p in source) {
+        target[p] = source[p];
+    }
+    
+    return target;
 }
 
 // Bootstrap Content
