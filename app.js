@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express'),
     app = module.exports = express.createServer(),
     Db = require('mongodb').Db,
@@ -9,7 +8,8 @@ var express = require('express'),
     Server = require('mongodb').Server,
     GenericPool = require('generic-pool'),
     notFoundHandler = require("./lib/middleware/NotFoundHandler"),
-    loader = require("./lib/loader");
+    Layers = require("layers").Layers,
+    NotFound = require("./lib/error/NotFound");
     
 app.pool = GenericPool.Pool({
     max: 10,
@@ -46,72 +46,14 @@ app.configure('production', function() {
     app.use(express.errorHandler()); 
 });
 
-function getInstanceName(className) {
-    return className[0].toLowerCase() + className.substr(1);
-}
-
 /**
- * Services and Controllers.
+ * Setup Layers.
  * 
- * These services are instantiated here as singletons and attached to the app object.
- * This prevents the need for services to instantiate new instances of other services 
- * (as they can inter-dependent) which would potentially cause circular issues.
+ * The Layers module automatically loads the controllers, services and views from
+ * their respective directories 
  */
-loader(app, "services");
-loader(app, "controllers");
-loader(app, "views");
-
-var controllers = {},
-    routes = require('./lib/routes/routes')(app),
-    baseFielder = {
-        method: "get",
-        headers: {
-            "accept": "text/html"
-        },
-        view: app.views.blankView
-    };
-
-for (var path in routes) {
-    var fielders = routes[path];
-    fielders.forEach(setupRoute);
-}
-
-function setupRoute(fielder) {
-    fielder = merge(baseFielder, fielder);
-    app[fielder.method].call(app, path, [], function(req, res, next) {
-        for (var view in fielder.views) {
-            if (req.accepts(view)) {
-                fielder.action.call(app, req, res, function(error, result) {
-                    if (error) {
-                        throw error;
-                    }
-                    fielder.views[view].render(req, res, result);
-                });
-                return;
-            }
-        }
-    });
-}
-
-function merge(base, inst) {
-    var merged = {};
-    for (var p in base) {
-        merged[p] = base[p];
-    }
-    for (var p in inst) {
-        merged[p] = inst[p];
-    }
-    
-    return merged;
-}
-
-function doMerge(target, source) {
-    for (var p in source) {
-        target[p] = source[p];
-    }
-    
-    return target;
-}
+var layeredApp = new Layers(app, __dirname + '/lib');
+layeredApp.setupRoutes(require('./lib/routes/routes')(app));
 
 // Bootstrap Content
 require("./lib/bootstrap")(app);
