@@ -1,4 +1,4 @@
-var View = require('./View');
+var AbstractView = require('./AbstractView');
 
 ErrorView = function(options) {
     var defaults = {
@@ -12,7 +12,7 @@ ErrorView = function(options) {
     this.options = defaults;
 };
 
-ErrorView.prototype = new View();
+ErrorView.prototype = new AbstractView();
 
 /**
  * Renders an Error.

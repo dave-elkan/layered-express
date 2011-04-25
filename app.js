@@ -8,7 +8,7 @@ var express = require('express'),
     Server = require('mongodb').Server,
     GenericPool = require('generic-pool'),
     notFoundHandler = require("./lib/middleware/NotFoundHandler"),
-    Layers = require("layers").Layers,
+    Layers = require("layers").Express,
     NotFound = require("./lib/error/NotFound");
     
 app.pool = GenericPool.Pool({
@@ -27,7 +27,6 @@ app.pool = GenericPool.Pool({
 });
 
 // Configuration
-
 app.configure(function(){
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -52,8 +51,7 @@ app.configure('production', function() {
  * The Layers module automatically loads the controllers, services and views from
  * their respective directories 
  */
-var layeredApp = new Layers(app, __dirname + '/lib');
-layeredApp.setupRoutes(require('./lib/routes/routes')(app));
+var layeredApp = new Layers(app, __dirname + '/layers', require('./lib/routes/routes'));
 
 // Bootstrap Content
 require("./lib/bootstrap")(app);

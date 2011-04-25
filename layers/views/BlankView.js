@@ -1,8 +1,8 @@
-var View = require('./View');
+var AbstractView = require('./AbstractView');
 
 BlankView = function() {};
 
-BlankView.prototype = new View();
+BlankView.prototype = new AbstractView();
 
 BlankView.prototype.getTemplate = function() {
     return "blank.jade";

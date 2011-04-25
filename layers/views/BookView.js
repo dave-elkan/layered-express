@@ -1,8 +1,8 @@
-var View = require('./View');
+var AbstractView = require('./AbstractView');
 
 BookView = function() {};
 
-BookView.prototype = new View();
+BookView.prototype = new AbstractView();
 
 BookView.prototype.getType = function() {
     return "book";
