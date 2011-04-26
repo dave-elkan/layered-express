@@ -1,4 +1,4 @@
-var AbstractView = require('./AbstractView');
+var AbstractView = require('../AbstractView');
 
 BookView = function() {};
 

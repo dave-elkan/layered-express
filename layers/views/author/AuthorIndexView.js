@@ -1,4 +1,4 @@
-var IndexView = require('./IndexView');
+var IndexView = require('../IndexView');
 
 AuthorIndexView = function() {};
 

@@ -1,4 +1,4 @@
-var Dao = require("../lib/dao/Dao"),
+var Dao = require("../layers/dao/Dao"),
     assert = require('assert');
 
 function setMockCollection(dao, results) {

@@ -1,7 +1,5 @@
 AbstractView = function() {};
 
-AbstractView.prototype = function() {};
-
 AbstractView.prototype.getTemplate = function() {
     throw new Error("Must override AbstractView::getTemplate()");
 };
