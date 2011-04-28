@@ -8,6 +8,10 @@ BookView.prototype.getType = function() {
     return "book";
 };
 
+BookView.prototype.getTitle = function(result) {
+    return result.name;
+};
+
 BookView.prototype.getTemplate = function() {
     return "book.jade";
 };

@@ -17,6 +17,10 @@ AuthorView.prototype.format = function(author, callback) {
     callback(null, author);
 };
 
+AuthorView.prototype.getTitle = function(result) {
+    return result.name;
+}
+
 AuthorView.prototype.getType = function() {
     return "author";
 };
