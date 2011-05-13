@@ -20,11 +20,11 @@ ErrorView.prototype = new AbstractView();
  * Renders an error to either text/html or application/json depending on the
  * Accept header of the request.
  *
- * @param {Object}  error   The error to render.
  * @param {Object}  req     The request object.
  * @param {Object}  res     The response object.
+ * @param {Object}  error   The error to render.
  */
-ErrorView.prototype.render = function(error, req, res) {
+ErrorView.prototype.render = function(req, res, error) {
     this.getErrorOutput(error, function(outError) {
         if (req.accepts("json")) {
             res.send({

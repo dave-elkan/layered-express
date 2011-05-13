@@ -4,7 +4,7 @@ var express = require('express'),
     AuthorController = require('../lib/controllers/AuthorController');
 	
 function configureServer(server) {
-	server.configure(function(){
+	server.configure(function() {
 	  server.set('views', __dirname + '/../views');
 	  server.use(express.bodyParser());
 	  server.use(express.methodOverride());

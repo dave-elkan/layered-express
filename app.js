@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+
 var express = require('express'),
     app = module.exports = express.createServer(),
     Db = require('mongodb').Db,
@@ -27,8 +28,8 @@ app.pool = GenericPool.Pool({
 });
 
 // Configuration
-app.configure(function(){
-    app.set('views', __dirname + '/views');
+app.configure(function() {
+    app.set('views', __dirname + '/templates');
     app.set('view engine', 'jade');
     app.use(express.bodyParser());
     app.use(express.methodOverride());
@@ -51,7 +52,14 @@ app.configure('production', function() {
  * The Layers module automatically loads the controllers, services and views from
  * their respective directories 
  */
-var layeredApp = new Layers(app, __dirname + '/layers', require('./lib/routes/routes'));
+var routes = require('./lib/routes/routes');
+new Layers(app, __dirname + '/layers', routes, {
+    layers: [
+        "controllers",
+        "services",
+        "views"
+    ]
+});
 
 // Bootstrap Content
 require("./lib/bootstrap")(app);

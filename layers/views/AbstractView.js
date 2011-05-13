@@ -1,7 +1,7 @@
 AbstractView = function() {};
 
 AbstractView.prototype.getTemplate = function() {
-    throw new Error("Must override AbstractView::getTemplate()");
+    throw new Error("Must define getTemplate function");
 };
 
 /**
@@ -15,7 +15,8 @@ AbstractView.prototype.render = function(req, res, result) {
     var self = this;
     this.format(result, function(error, result) {
         if (error) {
-            throw new Error(error);
+            var ErrorView = require('./ErrorView');
+            new ErrorView().render(req, res, error);
         } else {
             res.render(self.getTemplate(), {
                 locals: {
@@ -23,7 +24,7 @@ AbstractView.prototype.render = function(req, res, result) {
                     type: self.getType(),
                     result: result
                 }
-            });        
+            });
         }
     });
 };

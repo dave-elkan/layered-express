@@ -1,4 +1,5 @@
 var AbstractService = require('./AbstractService'),
+    NotFound = require("../../lib/error/NotFound"),
     Dao = require('../dao/Dao');
 
 BookService = function(app) {
@@ -28,16 +29,19 @@ BookService.prototype.getBookAndItsAuthor = function(bookKey, callback) {
     var self = this;
     this.dao.getItemByKey(bookKey, function(error, book) {
         if (error) {
-            throw error;
+            callback(error);
+        } else if (!book) {
+            callback(new NotFound("Book not found"));
+        } else {
+            self.app.services.authorService.getItemByKey(book.author, function(error, author) {
+                if (error) {
+                    callback(error);
+                } else {
+                    book.authorDetails = author;
+                    callback(null, book);
+                }
+            });
         }
-        self.app.services.authorService.getItemByKey(book.author, function(error, author) {
-            if (error) {
-                callback(error);
-            } else {
-                book.authorDetails = author;
-                callback(null, book);
-            }
-        });
     });
 };
 
