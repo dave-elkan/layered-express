@@ -1,11 +1,12 @@
 BaseView = function() {};
 
 BaseView.prototype.getTemplate = function() {
-    throw new Error("Must define getTemplate function");
+    return "blank.jade"
 };
 
 /**
- * Renders a view.
+ * Renders a view with title, type and the result of the action
+ * or an ErrorView is rendered if an error occurred.
  *
  * @param {Object}  req     The request object.
  * @param {Object}  res     The response object.
