@@ -1,8 +1,8 @@
-var AbstractView = require('../AbstractView');
+var BaseView = require('../BaseView');
 
 AuthorView = function() {};
 
-AuthorView.prototype = new AbstractView();
+AuthorView.prototype = new BaseView();
 
 /**
  * Simple example of how the format function can be used.

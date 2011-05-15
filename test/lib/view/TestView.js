@@ -2,7 +2,7 @@ var View = require('../../../lib/view/View');
 
 TestView = function() {};
 
-TestView.prototype = new AbstractView();
+TestView.prototype = new BaseView();
 
 TestView.prototype.getType = function() {
     return "test";

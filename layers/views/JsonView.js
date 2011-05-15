@@ -1,8 +1,8 @@
-var AbstractView = require('./AbstractView');
+var BaseView = require('./BaseView');
 
 JsonView = function() {};
 
-JsonView.prototype = new AbstractView();
+JsonView.prototype = new BaseView();
 
 /**
  * Simply sends the serialised object.

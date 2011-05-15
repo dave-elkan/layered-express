@@ -1,10 +1,10 @@
-var AbstractService = require('./AbstractService');
+var BaseService = require('./BaseService');
 
 HomeService = function(app) {
     this.app = app;
 };
 
-HomeService.prototype = new AbstractService();
+HomeService.prototype = new BaseService();
 
 /**
  * Returns a list of all Authors and their Books.

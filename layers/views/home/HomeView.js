@@ -1,8 +1,8 @@
-var AbstractView = require('../AbstractView');
+var BaseView = require('../BaseView');
 
 HomeView = function() {};
 
-HomeView.prototype = new AbstractView();
+HomeView.prototype = new BaseView();
 
 HomeView.prototype.getType = function() {
     return "home";

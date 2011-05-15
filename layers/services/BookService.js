@@ -1,4 +1,4 @@
-var AbstractService = require('./AbstractService'),
+var BaseService = require('./BaseService'),
     NotFound = require("../../lib/error/NotFound"),
     Dao = require('../dao/Dao');
 
@@ -7,7 +7,7 @@ BookService = function(app) {
     this.app = app;
 };
 
-BookService.prototype = new AbstractService();
+BookService.prototype = new BaseService();
 
 /**
  * Retrieves a list of Books by Author.

@@ -1,8 +1,8 @@
-var AbstractView = require('./AbstractView');
+var BaseView = require('./BaseView');
 
 IndexView = function() {};
 
-IndexView.prototype = new AbstractView();
+IndexView.prototype = new BaseView();
 
 IndexView.prototype.getTemplate = function() {
     return "index.jade";
