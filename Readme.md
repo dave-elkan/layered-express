@@ -1,6 +1,15 @@
 # A Layered Node Example
 
-  For more information see the blog post on [edave.net](http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express)
+For more information see the blog post on [edave.net](http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express)
+  
+This example relies on a number of modules:
+
+*   [Node 0.4.3](http://nodejs.org)
+*   [Express 2.0.0](http://expressjs.org)
+*   [Expresso 0.7.3](http://visionmedia.github.com/expresso/)
+*   [node-mongodb-native 0.9.1](https://github.com/christkv/node-mongodb-native)
+*   [generic-pool 1.0.4](https://github.com/coopernurse/node-pool)
+*   [MongoDB 1.6.3](http://mongodb.org/)
 
 ## License 
 
