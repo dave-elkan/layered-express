@@ -52,14 +52,13 @@ app.configure('production', function() {
  * The Layers module automatically loads the controllers, services and views from
  * their respective directories 
  */
-var routes = require('./lib/routes');
-new Layers(app, __dirname + '/layers', routes, {
+var wiring = require('./lib/wiring');
+new Layers(app, __dirname + '/layers', wiring, {
     layers: [
         "controllers",
         "services",
         "views"
-    ],
-    logging: true
+    ]
 });
 
 // Bootstrap Content
