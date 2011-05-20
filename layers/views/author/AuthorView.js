@@ -21,7 +21,7 @@ AuthorView.prototype.getTitle = function(result) {
     return result.name;
 }
 
-AuthorView.prototype.getType = function() {
+AuthorView.prototype.getSection = function() {
     return "author";
 };
 

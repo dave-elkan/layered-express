@@ -1,5 +1,3 @@
-var BaseView = require('./BaseView');
-
 ErrorView = function(options) {
     var defaults = {
         showStack: false,
@@ -11,8 +9,6 @@ ErrorView = function(options) {
     this.title = "Error";
     this.options = defaults;
 };
-
-ErrorView.prototype = new BaseView();
 
 /**
  * Renders an Error.
@@ -33,7 +29,7 @@ ErrorView.prototype.render = function(req, res, error) {
         } else {
             res.render("error.jade", {
                 locals: {
-                    type: "Error",
+                    section: "Error",
                     title: outError.message,
                     error: outError
                 },

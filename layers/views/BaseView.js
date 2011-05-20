@@ -1,44 +1,33 @@
+var BaseExpressView = require('layers').BaseExpressView,
+    ErrorView = require('./ErrorView'),
+    errorView = new ErrorView();
+
 BaseView = function() {};
 
-BaseView.prototype.getTemplate = function() {
-    return "blank.jade"
-};
+BaseView.prototype = new BaseExpressView();
 
 /**
- * Renders a view with title, type and the result of the action
- * or an ErrorView is rendered if an error occurred.
- *
- * @param {Object}  req     The request object.
- * @param {Object}  res     The response object.
- * @param {Object}  result  The object(s) being rendered.
+ * Returns the parameters required to render a page.
+ * Title, the Type and the model from the datastore.
+ * 
+ * @param result The result object from the datastore.
  */
-BaseView.prototype.render = function(req, res, result) {
+BaseView.prototype.getRenderParameters = function(result) {
     var self = this;
-    this.format(result, function(error, result) {
-        if (error) {
-            var ErrorView = require('./ErrorView');
-            new ErrorView().render(req, res, error);
-        } else {
-            res.render(self.getTemplate(), {
-                locals: {
-                    title: self.getTitle(result),
-                    type: self.getType(),
-                    result: result
-                }
-            });
+    return {
+        locals: {
+            title: self.getTitle(result),
+            section: self.getSection(),
+            result: result
         }
-    });
+    };
 };
 
 /**
- * Placeholder function allowing for the formatting of 
- * objects to be sent to the BaseView layer.
- *
- * @param {Object}   result     The object to format.
- * @param {Function} callback   The function to call when formatting is complete.
+ * Returns the error view singleton.
  */
-BaseView.prototype.format = function(result, callback) {
-    callback(null, result);
+BaseView.prototype.getErrorView = function() {
+    return errorView;
 };
 
 /**
@@ -54,6 +43,6 @@ BaseView.prototype.getTitle = function(result) {
 
 BaseView.prototype.toString = function() {
     return this.getTitle();
-}
+};
 
 module.exports = BaseView;

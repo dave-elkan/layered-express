@@ -1,10 +1,10 @@
-var BaseView = require('../BaseView');
+var BaseView = require('./BaseView');
 
 HomeView = function() {};
 
 HomeView.prototype = new BaseView();
 
-HomeView.prototype.getType = function() {
+HomeView.prototype.getSection = function() {
     return "home";
 };
 
@@ -13,7 +13,7 @@ HomeView.prototype.getTemplate = function() {
 };
 
 HomeView.prototype.getTitle = function() {
-    return "Home";
+    return "The Library";
 };
 
 module.exports = HomeView;

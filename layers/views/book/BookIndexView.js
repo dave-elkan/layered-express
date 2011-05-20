@@ -4,7 +4,7 @@ BookIndexView = function() {};
 
 BookIndexView.prototype = new IndexView();
 
-BookIndexView.prototype.getType = function() {
+BookIndexView.prototype.getSection = function() {
     return "book";
 }
 

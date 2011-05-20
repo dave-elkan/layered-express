@@ -4,7 +4,7 @@ AuthorIndexView = function() {};
 
 AuthorIndexView.prototype = new IndexView();
 
-AuthorIndexView.prototype.getType = function() {
+AuthorIndexView.prototype.getSection = function() {
     return "author";
 };
 

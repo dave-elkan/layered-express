@@ -7,9 +7,9 @@ html
     h1 eDave's Library
     ul
       li
-        a(href='/', class=(type == "home" ? "selected" : "")) Home
+        a(href='/', class=(section == "home" ? "selected" : "")) Home
       li
-        a(href='/authors', class=(type == "author" ? "selected" : "")) Authors
+        a(href='/authors', class=(section == "author" ? "selected" : "")) Authors
       li
-        a(href='/books', class=(type == "book" ? "selected" : "")) Books
+        a(href='/books', class=(section == "book" ? "selected" : "")) Books
     != body

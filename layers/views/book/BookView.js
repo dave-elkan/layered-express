@@ -4,7 +4,7 @@ BookView = function() {};
 
 BookView.prototype = new BaseView();
 
-BookView.prototype.getType = function() {
+BookView.prototype.getSection = function() {
     return "book";
 };
 
