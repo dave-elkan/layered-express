@@ -26,7 +26,9 @@ HomeService.prototype.getAuthorAndBookList = function(callback) {
                 }
             });
         }
-    })
+    });
 };
 
-module.exports = HomeService;
+module.exports = function(app) {
+    return new HomeService(app);
+};

@@ -1,9 +1,5 @@
-HomeController = function() {};
-
-HomeController.prototype = {
+module.exports = {
     getAuthorAndBookList: function(req, res, callback) {
         this.services.homeService.getAuthorAndBookList(callback);
     }
 };
-
-module.exports = HomeController;

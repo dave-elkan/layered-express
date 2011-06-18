@@ -29,4 +29,4 @@ AuthorView.prototype.getTemplate = function() {
     return "author.jade";
 };
 
-module.exports = AuthorView;
+module.exports = new AuthorView;

@@ -84,7 +84,7 @@ Dao.prototype.read = function(params, callback) {
             for (var field in params.selector) {
                 indexedFields.push([field, 1]);
             }
-            
+
             self.ensureIndex(collection, indexedFields, function(error) {
                 if (error) {
                     callback(error);

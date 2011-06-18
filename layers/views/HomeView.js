@@ -16,4 +16,4 @@ HomeView.prototype.getTitle = function() {
     return "The Library";
 };
 
-module.exports = HomeView;
+module.exports = new HomeView();

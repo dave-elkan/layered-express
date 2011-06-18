@@ -45,4 +45,6 @@ BookService.prototype.getBookAndItsAuthor = function(bookKey, callback) {
     });
 };
 
-module.exports = BookService;
+module.exports = function(app) {
+    return new BookService(app);
+};

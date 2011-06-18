@@ -35,4 +35,6 @@ AuthorService.prototype.getAuthorAndTheirBooks = function(authorKey, callback) {
     });
 };
 
-module.exports = AuthorService;
+module.exports = function(app) {
+    return new AuthorService(app);
+};

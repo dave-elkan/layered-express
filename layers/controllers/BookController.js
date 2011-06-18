@@ -1,6 +1,4 @@
-BookController = function() {};
-
-BookController.prototype = {
+module.exports = {
     
     getBookIndex: function(req, res, callback) {
         this.services.bookService.getList(callback);
@@ -10,5 +8,3 @@ BookController.prototype = {
         this.services.bookService.getBookAndItsAuthor(req.params.key, callback);
     }
 };
-
-module.exports = BookController;

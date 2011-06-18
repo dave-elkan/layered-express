@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+// require.paths.unshift(__dirname + "/node_libraries")
 
 var express = require('express'),
     app = module.exports = express.createServer(),
@@ -52,7 +53,7 @@ app.configure('production', function() {
  * The Layers module automatically loads the controllers, services and views from
  * their respective directories 
  */
-var wiring = require('./lib/wiring');
+var wiring = require('./layers/wiring');
 new Layers(app, __dirname + '/layers', wiring, {
     layers: [
         "controllers",

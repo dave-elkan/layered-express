@@ -12,4 +12,4 @@ AuthorIndexView.prototype.getTitle = function(result) {
     return "Authors (" + result.length + ")";
 };
 
-module.exports = AuthorIndexView;
+module.exports = new AuthorIndexView;

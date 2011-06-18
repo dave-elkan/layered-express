@@ -15,4 +15,4 @@ JsonView.prototype.render = function(req, res, result) {
     res.send(result);
 };
 
-module.exports = JsonView;
+module.exports = new JsonView;

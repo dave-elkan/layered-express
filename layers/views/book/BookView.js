@@ -16,4 +16,4 @@ BookView.prototype.getTemplate = function() {
     return "book.jade";
 };
 
-module.exports = BookView;
+module.exports = new BookView;

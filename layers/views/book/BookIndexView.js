@@ -12,4 +12,4 @@ BookIndexView.prototype.getTitle = function(result) {
     return "Books (" + result.length + ")";
 };
 
-module.exports = BookIndexView;
+module.exports = new BookIndexView;

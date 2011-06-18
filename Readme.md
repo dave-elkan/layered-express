@@ -4,7 +4,7 @@ For more information see the blog post on [edave.net](http://www.edave.net/2011/
   
 This example relies on a number of modules:
 
-*   [Node 0.4.3](http://nodejs.org)
+*   [Node 0.4.7](http://nodejs.org)
 *   [Express 2.0.0](http://expressjs.org)
 *   [Expresso 0.7.3](http://visionmedia.github.com/expresso/)
 *   [node-mongodb-native 0.9.1](https://github.com/christkv/node-mongodb-native)

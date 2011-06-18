@@ -1,6 +1,4 @@
-AuthorController = function() {};
-
-AuthorController.prototype = {
+module.exports = {
     
     displayAuthorList: function(req, res, callback) {
         this.services.authorService.getList(callback);
@@ -15,5 +13,3 @@ AuthorController.prototype = {
         }
     }
 };
-
-module.exports = AuthorController;
