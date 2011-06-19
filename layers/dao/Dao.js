@@ -1,19 +1,37 @@
-Dao = function(pool, type) {
+/**
+ * Generic DAO.
+ * 
+ * This DAO implementation fulfills C and R of CRUD.
+ * It can create and pull from any collection given a basic 
+ * params object.
+ *
+ * This dao uses a generic-pool connection pool by default.
+ *
+ * @param pool The generic-pool connection pool.
+ * @param collection The name of the collection.
+ */
+Dao = function(pool, collectionName) {
     this.pool = pool;
-    this.type = type;
+    this.collectionName = collectionName;
 };
 
 Dao.prototype = function() {};
 
+/**
+ * Gets the collection by name using the current collection name.
+ */
 Dao.prototype.getCollection = function(callback) {
-    this.getCollectionByName(this.type, callback);
+    this.getCollectionByName(this.collectionName, callback);
 };
 
-Dao.prototype.getCollectionByName = function(name, callback) {
+/**
+ * Gets a collection by name.
+ */
+Dao.prototype.getCollectionByName = function(collectionName, callback) {
     var self = this;
     this.pool.borrow(function(client) {
         client.collection(
-            name,
+            collectionName,
             function(error, collection) {
                 self.pool.returnToPool(client);
                 if (error) {
@@ -26,6 +44,9 @@ Dao.prototype.getCollectionByName = function(name, callback) {
     });
 };
 
+/**
+ * Persists a number of items or single item.
+ */
 Dao.prototype.create = function(items, callback) {
     var self = this;
     this.getCollection(function(error, collection) {
@@ -38,7 +59,7 @@ Dao.prototype.create = function(items, callback) {
 
             for (var i = 0, ii = items.length; i < ii; i++) {
                 if (items[i]._id) {
-                    callback(new Error("Attempting to create asset which is persisted"));
+                    callback(new Error("Attempting to create asset which is already persisted"));
                     return;
                 }
                 
@@ -61,13 +82,15 @@ Dao.prototype.create = function(items, callback) {
     });
 };
 
+/**
+ * Reads a list of items from the datastore.
+ */
 Dao.prototype.read = function(params, callback) {
     var self = this;
     this.getCollection(function(error, collection) {
         if (error) {
             callback(error);
         } else {
-            
             if (!params.selector) {
                 params.selector = {};
             }
@@ -85,7 +108,7 @@ Dao.prototype.read = function(params, callback) {
                 indexedFields.push([field, 1]);
             }
 
-            self.ensureIndex(collection, indexedFields, function(error) {
+            collection.ensureIndex(indexedFields, function(error, indexName) {
                 if (error) {
                     callback(error);
                 } else {
@@ -113,20 +136,16 @@ Dao.prototype.read = function(params, callback) {
     });
 };
 
-Dao.prototype.ensureIndex = function(collection, indexDetails, callback) {
-    collection.ensureIndex(indexDetails, function(error, indexName) {
-        if (error) {
-            callback(error);
-        } else {
-            callback(null);
-        }
-    });
-};
-
+/**
+ * Reads an item by it's unique key.
+ */
 Dao.prototype.getItemByKey = function(key, callback) {
     this.getItemByField("key", key, callback);
 };
 
+/**
+ * Reads an item by field value.
+ */
 Dao.prototype.getItemByField = function(field, value, callback) {
     var self = this;
     var params = {
@@ -139,6 +158,9 @@ Dao.prototype.getItemByField = function(field, value, callback) {
     this.read(params, callback);
 };
 
+/**
+ * Reads a list of items by field value
+ */
 Dao.prototype.getItemListByField = function(field, value, callback) {
     var params = {
         selector: {}
@@ -147,6 +169,9 @@ Dao.prototype.getItemListByField = function(field, value, callback) {
     this.read(params, callback);
 };
 
+/**
+ * Reads a list of items from the current collection
+ */
 Dao.prototype.getList = function(options, callback) {
     this.read(options, callback);
 };
