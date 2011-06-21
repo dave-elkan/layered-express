@@ -62,4 +62,4 @@ ErrorView.prototype.getErrorOutput = function(error, callback) {
     callback(error);
 };
 
-module.exports = ErrorView;
+module.exports = new ErrorView();

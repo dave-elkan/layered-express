@@ -1,5 +1,4 @@
 var BaseExpressView = require('layers').BaseExpressView,
-    ErrorView = require('./ErrorView'),
     errorView = new ErrorView();
 
 BaseView = function() {};
