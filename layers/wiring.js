@@ -42,7 +42,8 @@ module.exports = function(app) {
         "/author/:key": [{
                 action: controllers.authorController.displayAuthorByKey,
                 views: {
-                    html: views.authorView
+                    html: views.authorView,
+                    json: views.jsonView
                 }
             }
         ]
