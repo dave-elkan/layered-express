@@ -10,7 +10,7 @@ This example relies on a number of modules:
 *   [Express 2.3.11](http://expressjs.org)
 *   [mongodb 0.9.4](https://github.com/christkv/node-mongodb-native)
 *   [generic-pool 1.0.6](https://github.com/coopernurse/node-pool)
-*   [jade@0.12.2](https://github.com/coopernurse/node-pool)
+*   [jade 0.12.2](https://github.com/coopernurse/node-pool)
 *	[Layers 0.0.3](https://github.com/dave-elkan/layers)
 *   [MongoDB 1.6.3](http://mongodb.org/)
 
