@@ -1,14 +1,17 @@
 # A Layered Node Example
 
-For more information see the blog post on [edave.net](http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express)
-  
+For more information see the blog post on [edave.net](http://www.edave.net/2011/06/28/layers-layered-architecture-for-nodejs-made-easy
+
+You must have MongoDB up and running for this to work as it attempts to bootstrap some data during startup.
+
 This example relies on a number of modules:
 
-*   [Node 0.4.7](http://nodejs.org)
-*   [Express 2.0.0](http://expressjs.org)
-*   [Expresso 0.7.3](http://visionmedia.github.com/expresso/)
-*   [node-mongodb-native 0.9.1](https://github.com/christkv/node-mongodb-native)
-*   [generic-pool 1.0.4](https://github.com/coopernurse/node-pool)
+*   [Node 0.4.8](http://nodejs.org)
+*   [Express@2.3.11](http://expressjs.org)
+*   [mongodb@0.9.4](https://github.com/christkv/node-mongodb-native)
+*   [generic-pool@1.0.6](https://github.com/coopernurse/node-pool)
+*   [jade@0.12.2](https://github.com/coopernurse/node-pool)
+*	[Layers@0.0.3](https://github.com/dave-elkan/layers)
 *   [MongoDB 1.6.3](http://mongodb.org/)
 
 ## License 
